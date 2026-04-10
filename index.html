@@ -411,14 +411,14 @@ function draw() {
   ctx.fill();
   ctx.shadowBlur = 0;
 
-  // Scores
-  ctx.font = `bold ${H * 0.22}px 'Orbitron', monospace`;
+  // Scores (real-time, drawn as large background text)
+  ctx.font = `900 ${H * 0.28}px 'Orbitron', monospace`;
   ctx.textBaseline = 'top';
   ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(0,212,255,0.12)';
-  ctx.fillText(p1Score, W * 0.25, 12);
-  ctx.fillStyle = 'rgba(255,68,102,0.12)';
-  ctx.fillText(p2Score, W * 0.75, 12);
+  ctx.fillStyle = 'rgba(0,212,255,0.10)';
+  ctx.fillText(p1Score, W * 0.28, H * 0.08);
+  ctx.fillStyle = 'rgba(255,68,102,0.10)';
+  ctx.fillText(p2Score, W * 0.72, H * 0.08);
 }
 
 function update() {
@@ -482,10 +482,17 @@ function update() {
 
   // Scoring
   if (bx + BALL_R < 0) {
+    // Reset ball position immediately to prevent double-scoring
+    bx = canvas.width / 2;
+    by = canvas.height / 2;
+    bvx = 0; bvy = 0;
     scorePoint(2); // AI scores
     return;
   }
-  if (bx - BALL_R > W) {
+  if (bx - BALL_R > canvas.width) {
+    bx = canvas.width / 2;
+    by = canvas.height / 2;
+    bvx = 0; bvy = 0;
     scorePoint(1); // Player scores
     return;
   }
