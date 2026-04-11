@@ -34,50 +34,35 @@
       user-select: none;
     }
 
+    .lang-toggle { position: fixed; top: 16px; right: 16px; z-index: 100; display: flex; gap: 4px; background: rgba(0,0,0,0.4); border-radius: 20px; padding: 4px; border: 1px solid rgba(0,212,255,0.15); }
+    .lang-btn { padding: 5px 14px; border: none; border-radius: 16px; font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; cursor: pointer; background: transparent; color: var(--text-dim); transition: all 0.2s; }
+    .lang-btn.active { background: var(--p1); color: var(--bg); font-weight: 700; }
+
     #app { width: 100%; max-width: 760px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 
-    .scoreboard {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      font-family: 'Orbitron', monospace;
-    }
+    .scoreboard { display: flex; align-items: center; gap: 40px; font-family: 'Orbitron', monospace; }
     .score-box { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 80px; }
     .score-label { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; }
     .score-value { font-size: 3.5rem; font-weight: 900; line-height: 1; }
     .score-box.p1 .score-value { color: var(--p1); text-shadow: 0 0 20px var(--p1); }
     .score-box.p2 .score-value { color: var(--p2); text-shadow: 0 0 20px var(--p2); }
-
     .vs { font-size: 1.2rem; color: var(--text-dim); font-weight: 700; }
 
-    .canvas-wrap {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 30px rgba(0,212,255,0.05);
-    }
-
+    .canvas-wrap { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 30px rgba(0,212,255,0.05); }
     canvas { display: block; background: #020c1a; }
 
     .hud-row { display: flex; justify-content: space-between; width: 100%; max-width: 700px; align-items: center; }
     .hud-info { font-size: 0.75rem; color: var(--text-dim); }
-    .btn {
-      padding: 10px 28px;
-      border: none;
-      border-radius: 30px;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.05em;
-    }
+    .btn { padding: 10px 28px; border: none; border-radius: 30px; font-family: 'Share Tech Mono', monospace; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; letter-spacing: 0.05em; }
     .btn-primary { background: var(--p1); color: var(--bg); font-weight: 700; box-shadow: var(--glow-p1); }
     .btn-primary:hover { background: #33ddff; }
     .btn-secondary { background: transparent; color: var(--text-dim); border: 1px solid rgba(0,212,255,0.15); }
     .btn-secondary:hover { color: var(--text); border-color: var(--p1); }
 
-    /* ── START SCREEN ── */
-    #start-screen { display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center; }
+    /* ── SCREENS ── */
+    #start-screen, #game-screen, #win-screen, #about-screen { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; width: 100%; }
+    #start-screen.hidden, #game-screen.hidden, #win-screen.hidden, #about-screen.hidden { display: none; }
+
     .title-big { font-family: 'Orbitron', monospace; font-size: clamp(2.5rem, 10vw, 4rem); font-weight: 900; letter-spacing: 0.05em; line-height: 1.1; }
     .title-big span.p1-text { color: var(--p1); text-shadow: 0 0 30px var(--p1); }
     .title-big span.p2-text { color: var(--p2); text-shadow: 0 0 30px var(--p2); }
@@ -86,18 +71,9 @@
     .rules-list li { font-size: 0.85rem; color: var(--text-dim); padding-left: 16px; position: relative; }
     .rules-list li::before { content: '▸'; position: absolute; left: 0; color: var(--p1); }
 
-    .desc-row { display: flex; gap: 24px; justify-content: center; font-size: 0.8rem; color: var(--text-dim); }
+    .desc-row { display: flex; gap: 24px; justify-content: center; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap; }
     .desc-row span { display: flex; align-items: center; gap: 6px; }
 
-    #start-screen.hidden, #game-screen.hidden, #win-screen.hidden { display: none; }
-
-    /* ── WIN SCREEN ── */
-    #about-screen { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; width: 100%; }
-#about-screen::-webkit-scrollbar { width: 6px; }
-#about-screen::-webkit-scrollbar-track { background: transparent; }
-#about-screen::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
-
-#win-screen { display: none; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
     .win-emoji { font-size: 72px; animation: float 3s ease-in-out infinite; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
     .win-title { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; }
@@ -107,6 +83,15 @@
     .win-score { font-family: 'Orbitron', monospace; font-size: 2.5rem; font-weight: 900; color: var(--text); }
     .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
+    /* ── ABOUT ── */
+    #about-screen::-webkit-scrollbar { width: 6px; }
+    #about-screen::-webkit-scrollbar-track { background: transparent; }
+    #about-screen::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+    #about-inner { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 24px; max-height: 60vh; overflow-y: auto; width: 100%; text-align: left; }
+    #about-inner::-webkit-scrollbar { width: 6px; }
+    #about-inner::-webkit-scrollbar-track { background: transparent; }
+    #about-inner::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+
     @media (max-width: 500px) {
       .score-value { font-size: 2.5rem; }
       .scoreboard { gap: 20px; }
@@ -114,179 +99,166 @@
   </style>
 </head>
 <body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="lang-zh" onclick="setLang('zh')">中</button>
+  <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+</div>
+
 <div id="app">
 
   <!-- START -->
   <div id="start-screen">
-    <div class="title-big">
-      <span class="p1-text">PING</span><br>
-      <span class="p2-text">PONG</span>
-    </div>
-    <ul class="rules-list">
-      <li>滑鼠控制左邊藍色球拍（上下移動）</li>
-      <li>電腦控制右邊紅色球拍</li>
-      <li>11 分制，先拿 11 分者勝</li>
-      <li>每得一分球速加快一點點</li>
+    <div class="title-big"><span class="p1-text">PING</span><br><span class="p2-text">PONG</span></div>
+    <ul class="rules-list" id="rules-list">
+      <li data-zh="滑鼠控制左邊藍色球拍（上下移動）" data-en="Move mouse up/down to control the left blue paddle">滑鼠控制左邊藍色球拍（上下移動）</li>
+      <li data-zh="電腦控制右邊紅色球拍" data-en="Computer controls the right red paddle">電腦控制右邊紅色球拍</li>
+      <li data-zh="11 分制，先拿 11 分者勝" data-en="First to 11 points wins">11 分制，先拿 11 分者勝</li>
+      <li data-zh="每得一分球速加快一點點" data-en="Ball gets faster with each point">每得一分球速加快一點點</li>
     </ul>
-    <div class="desc-row">
-      <span>🎮 玩家 <strong style="color:var(--p1)">VS</strong> 電腦</span>
-      <span>📱 支援觸控</span>
+    <div class="desc-row" id="desc-row">
+      <span data-zh="🎮 玩家 <strong style='color:var(--p1)'>VS</strong> 電腦" data-en="🎮 Player <strong style='color:var(--p1)'>VS</strong> Computer">🎮 玩家 <strong style="color:var(--p1)">VS</strong> 電腦</span>
+      <span data-zh="📱 支援觸控" data-en="📱 Touch supported">📱 支援觸控</span>
     </div>
-    <button class="btn btn-primary" onclick="startGame()">開始發球</button>
-    <button class="btn btn-secondary" onclick="showAbout()">關於</button>
+    <button class="btn btn-primary" id="btn-start" onclick="startGame()">開始發球</button>
+    <button class="btn btn-secondary" id="btn-about" onclick="showAbout()">關於</button>
   </div>
 
   <!-- GAME -->
   <div id="game-screen" class="hidden">
     <div class="hud-row">
       <div class="hud-info" id="hud-level">球速: 6.0</div>
-      <button class="btn btn-secondary" onclick="pauseGame()">暫停</button>
+      <button class="btn btn-secondary" id="btn-pause" onclick="pauseGame()">暫停</button>
     </div>
-    <div class="canvas-wrap">
-      <canvas id="pong"></canvas>
-    </div>
+    <div class="canvas-wrap"><canvas id="pong"></canvas></div>
   </div>
 
   <!-- ABOUT -->
   <div id="about-screen" class="hidden">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;max-width:700px;padding:8px;">
-      <div class="title-big" style="font-size:clamp(1.8rem,6vw,2.5rem);">
-        <span class="p1-text">PING</span> <span class="p2-text">PONG</span>
-      </div>
-      <p style="font-size:0.8rem;color:var(--text-dim);text-align:center;">🏓 The History of the World&#39;s First Commercial Video Game</p>
-      <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);border-radius:12px;padding:24px;max-height:65vh;overflow-y:auto;width:100%;">
-
-        <h2 style="color:var(--p1);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🎮 Early Origins | 早期起源</h2>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
-          <strong>1958</strong> — American physicist <strong>William Higinbotham</strong> created <em>Tennis for Two</em> at Brookhaven National Laboratory. Displayed on an oscilloscope, it is widely recognized as the world&#39;s first interactive electronic game.
-        </p>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:24px;
-">
-          <strong>1958</strong> — 美國物理學家 <strong>威廉·海吉諾比姆 (William Higinbotham)</strong> 在布魯克海文國家實驗室開發了《<strong>雙人網球 (Tennis for Two)</strong>》。使用示波器顯示畫面，被公認為史上第一個可互動的電子遊戲。
-        </p>
+    <div id="about-inner">
+      <h2 style="color:var(--p1);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🎮 Early Origins | 早期起源</h2>
+      <div class="about-body">
+        <p class="en" style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:12px;"><strong>1958</strong> — American physicist <strong>William Higinbotham</strong> created <em>Tennis for Two</em> at Brookhaven National Laboratory. Displayed on an oscilloscope, it is widely recognized as the world's first interactive electronic game.</p>
+        <p class="zh" style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:20px;"><strong>1958</strong> — 美國物理學家 <strong>威廉·海吉諾比姆 (William Higinbotham)</strong> 在布魯克海文國家實驗室開發了《<strong>雙人網球 (Tennis for Two)</strong>》。使用示波器顯示畫面，被公認為史上第一個可互動的電子遊戲。</p>
 
         <h2 style="color:var(--p2);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🏆 Birth of Pong | Pong 的誕生</h2>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
-          <strong>1972</strong> — Engineer <strong>Al Alcorn</strong> at Atari, tasked by founder <strong>Nolan Bushnell</strong>, designed <em>Pong</em> — a pixel-style table tennis game with simple block graphics. It became an instant sensation.
-        </p>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:24px;">
-          <strong>1972</strong> — Atari 工程師 <strong>艾爾·艾爾科恩 (Al Alcorn)</strong>，接受創辦人 <strong>諾蘭·布什內爾 (Nolan Bushnell)</strong> 的任務，設計了《<strong>Pong</strong>》——一款以像素方塊與球組成的桌上型網球遊戲。一推出就造成轟動。
-        </p>
+        <p class="en" style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:12px;"><strong>1972</strong> — Engineer <strong>Al Alcorn</strong> at Atari, tasked by founder <strong>Nolan Bushnell</strong>, designed <em>Pong</em> — a pixel-style table tennis game with simple block graphics. It became an instant sensation.</p>
+        <p class="zh" style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:20px;"><strong>1972</strong> — Atari 工程師 <strong>艾爾·艾爾科恩 (Al Alcorn)</strong>，接受創辦人 <strong>諾蘭·布什內爾 (Nolan Bushnell)</strong> 的任務，設計了《<strong>Pong</strong>》——一款以像素方塊與球組成的桌上型網球遊戲。一推出就造成轟動。</p>
 
         <h2 style="color:var(--p1);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🔊 Where the Name Came From | 名稱由來</h2>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
-          The name <em>Pong</em> mimics the sound of a ping-pong ball hitting a paddle. Some also trace it to the popular tabletop game <em>Ping-Pong</em> of the era. Atari was first to register it as a trademark.
-        </p>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:24px;">
-          <strong>Pong</strong> 這個名字來自於乒乓球撞擊球拍的聲音。另一說是取自當時流行的桌遊「Ping-Pong」命名。Atari 率先搶先登記了版權。
-        </p>
+        <p class="en" style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:12px;">The name <em>Pong</em> mimics the sound of a ping-pong ball hitting a paddle. Some also trace it to the popular tabletop game <em>Ping-Pong</em> of the era. Atari was first to register it as a trademark.</p>
+        <p class="zh" style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:20px;"><strong>Pong</strong> 這個名字來自於乒乓球撞擊球拍的聲音。另一說是取自當時流行的桌遊「Ping-Pong」命名。Atari 率先搶先登記了版權。</p>
 
         <h2 style="color:var(--p2);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🌍 Impact & Legacy | 影響與意義</h2>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
-          Pong brought video games into <strong>public spaces</strong> — restaurants, bars, and arcades. In the early 1980s, LCD handheld Pong machines became a childhood classic across Asia. The game established the paradigm of <strong>2D graphics and paddle-style controls</strong> that shaped an entire generation of game design.
-        </p>
-        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);">
-          Pong 讓電子遊戲首次進入<strong>公共娛樂場所</strong>（餐廳、酒吧、遊樂場）。1980 年代初，LCD 掌上型 Pong 遊戲機風靡亞洲，成為許多人的童年回憶。這款遊戲奠定了<strong>2D 圖形、桿式控制器</strong>的遊戲典範，影響深遠。
-        </p>
-
+        <p class="en" style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:12px;">Pong brought video games into <strong>public spaces</strong> — restaurants, bars, and arcades. In the early 1980s, LCD handheld Pong machines became a childhood classic across Asia. The game established the paradigm of <strong>2D graphics and paddle-style controls</strong> that shaped an entire generation of game design.</p>
+        <p class="zh" style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);"><strong>Pong</strong> 讓電子遊戲首次進入<strong>公共娛樂場所</strong>（餐廳、酒吧、遊樂場）。1980 年代初，LCD 掌上型 Pong 遊戲機風靡亞洲，成為許多人的童年回憶。這款遊戲奠定了<strong>2D 圖形、桿式控制器</strong>的遊戲典範，影響深遠。</p>
       </div>
-      <button class="btn btn-secondary" onclick="showStart()">← 返回</button>
     </div>
+    <button class="btn btn-secondary" id="btn-back" onclick="showStart()">← 返回</button>
   </div>
 
   <!-- WIN -->
-  <div id="win-screen">
+  <div id="win-screen" class="hidden">
     <div class="win-emoji" id="win-emoji">🏆</div>
     <div class="win-title" id="win-title">玩家獲勝！</div>
-    <div class="win-sub">最終比數</div>
+    <div class="win-sub" id="win-sub">最終比數</div>
     <div class="win-score" id="win-score">11 - 9</div>
     <div class="btn-row">
-      <button class="btn btn-primary" onclick="startGame()">再來一局</button>
-      <button class="btn btn-secondary" onclick="showStart()">回主選單</button>
+      <button class="btn btn-primary" id="btn-rematch" onclick="startGame()">再來一局</button>
+      <button class="btn btn-secondary" id="btn-menu" onclick="showStart()">回主選單</button>
     </div>
   </div>
 
 </div>
 
 <script>
+// ── i18n ──
+let currentLang = 'zh';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('lang-zh').classList.toggle('active', lang === 'zh');
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+
+  // Rules list
+  document.querySelectorAll('#rules-list li').forEach(el => {
+    el.textContent = el.dataset[lang] || el.textContent;
+  });
+
+  // Desc row spans (innerHTML for HTML tags)
+  document.querySelectorAll('#desc-row span').forEach(el => {
+    el.innerHTML = el.dataset[lang] || el.innerHTML;
+  });
+
+  // Buttons
+  document.getElementById('btn-start').textContent  = lang === 'zh' ? '開始發球' : 'Start Game';
+  document.getElementById('btn-about').textContent  = lang === 'zh' ? '關於' : 'About';
+  document.getElementById('btn-pause').textContent = lang === 'zh' ? '暫停' : 'Pause';
+  document.getElementById('btn-back').textContent   = lang === 'zh' ? '← 返回' : '← Back';
+  document.getElementById('btn-rematch').textContent = lang === 'zh' ? '再來一局' : 'Rematch';
+  document.getElementById('btn-menu').textContent   = lang === 'zh' ? '回主選單' : 'Menu';
+
+  // Win screen
+  const p1win = document.getElementById('win-title').classList.contains('p1-win');
+  document.getElementById('win-title').textContent = lang === 'zh'
+    ? (p1win ? '玩家獲勝！' : '電腦獲勝！')
+    : (p1win ? 'You Win!' : 'Computer Wins!');
+  document.getElementById('win-sub').textContent   = lang === 'zh' ? '最終比數' : 'Final Score';
+
+  // HUD
+  updateHUD();
+
+  // About — toggle .en / .zh paragraphs
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? 'block' : 'none');
+}
+
+function updateHUD() {
+  const el = document.getElementById('hud-level');
+  if (el) el.textContent = (currentLang === 'zh' ? '球速: ' : 'Speed: ') + (typeof ballSpeed !== 'undefined' ? ballSpeed.toFixed(1) : '6.0');
+}
+
+// ── GAME ──
 const canvas = document.getElementById('pong');
 const ctx = canvas.getContext('2d');
 
-// Responsive canvas
 function resizeCanvas() {
   const maxW = Math.min(window.innerWidth - 32, 700);
-  const ratio = 0.5;
   canvas.width = maxW;
-  canvas.height = Math.round(maxW * ratio);
+  canvas.height = Math.round(maxW * 0.5);
 }
 resizeCanvas();
 window.addEventListener('resize', () => { resizeCanvas(); if (gameState === 'playing') draw(); });
 
-// Game constants
-const PADDLE_H_RATIO = 0.18;  // relative to canvas height
+const PADDLE_H_RATIO = 0.18;
 const BALL_R = 8;
 const WIN_SCORE = 11;
 
-let gameState = 'start'; // start | playing | paused | win
+let gameState = 'start';
 let animationId = null;
-
-// Scores
 let p1Score = 0, p2Score = 0;
-
-// Ball
 let bx, by, bvx, bvy, ballSpeed;
-
-// Paddles
-let paddleW, paddleH;
-let p1y, p2y; // center y
-let p1vy = 0;  // player velocity
-let aiVY = 0;  // AI velocity
-const AI_SPEED = 3.8;
-const PADDLE_SPEED = 5.5;
-const FRICTION = 0.88;
-
-// Trail
-const trail = [];
-const TRAIL_LEN = 6;
-
-// Score flash
-let flashTimer = 0;
-
-// Level
-let level = 0;
-
-// Input
-let mouseY = null;
-let touchY = null;
+let paddleW, paddleH, p1y, p2y;
+let p1vy = 0, aiVY = 0;
+const AI_SPEED = 3.8, PADDLE_SPEED = 5.5;
+const trail = [], TRAIL_LEN = 6;
+let flashTimer = 0, level = 0;
+let mouseY = null, touchY = null;
 
 function getCanvasCoords(e) {
   const rect = canvas.getBoundingClientRect();
   const scaleY = canvas.height / rect.height;
-  if (e.touches) {
-    return { y: (e.touches[0].clientY - rect.top) * scaleY };
-  }
-  return { y: (e.clientY - rect.top) * scaleY };
+  return { y: (e.touches ? e.touches[0].clientY - rect.top : e.clientY - rect.top) * scaleY };
 }
 
-canvas.addEventListener('mousemove', (e) => {
-  const { y } = getCanvasCoords(e);
-  mouseY = y;
-});
-canvas.addEventListener('touchmove', (e) => {
-  e.preventDefault();
-  const { y } = getCanvasCoords(e);
-  touchY = y;
-}, { passive: false });
-canvas.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  const { y } = getCanvasCoords(e);
-  touchY = y;
-}, { passive: false });
+canvas.addEventListener('mousemove', e => { mouseY = getCanvasCoords(e).y; });
+canvas.addEventListener('touchmove', e => { e.preventDefault(); touchY = getCanvasCoords(e).y; }, { passive: false });
+canvas.addEventListener('touchstart', e => { e.preventDefault(); touchY = getCanvasCoords(e).y; }, { passive: false });
 
 function resetBall(dir = 1) {
-  bx = canvas.width / 2;
-  by = canvas.height / 2;
-  const angle = (Math.random() * 0.8 - 0.4); // random angle
+  bx = canvas.width / 2; by = canvas.height / 2;
+  const angle = (Math.random() * 0.8 - 0.4);
   ballSpeed = 5.5 + level * 0.4;
   if (ballSpeed > 11) ballSpeed = 11;
   bvx = dir * ballSpeed * Math.cos(angle);
@@ -297,65 +269,65 @@ function resetBall(dir = 1) {
 function initGame() {
   paddleW = 10;
   paddleH = canvas.height * PADDLE_H_RATIO;
-  p1y = canvas.height / 2;
-  p2y = canvas.height / 2;
-  p1Score = 0;
-  p2Score = 0;
-  level = 0;
+  p1y = canvas.height / 2; p2y = canvas.height / 2;
+  p1Score = 0; p2Score = 0; level = 0;
   resetBall(Math.random() < 0.5 ? 1 : -1);
 }
 
 function startGame() {
   initGame();
   document.getElementById('start-screen').classList.add('hidden');
-  document.getElementById('win-screen').style.display = 'none';
+  document.getElementById('win-screen').classList.add('hidden');
+  document.getElementById('about-screen').classList.add('hidden');
   document.getElementById('game-screen').classList.remove('hidden');
   gameState = 'playing';
-  document.getElementById('hud-level').textContent = `球速: ${ballSpeed.toFixed(1)}`;
+  updateHUD();
   if (animationId) cancelAnimationFrame(animationId);
   loop();
 }
 
 function pauseGame() {
-  if (gameState === 'playing') {
-    gameState = 'paused';
-    cancelAnimationFrame(animationId);
-  } else if (gameState === 'paused') {
-    gameState = 'playing';
-    loop();
-  }
+  if (gameState === 'playing') { gameState = 'paused'; cancelAnimationFrame(animationId); }
+  else if (gameState === 'paused') { gameState = 'playing'; loop(); }
 }
 
 function showStart() {
   gameState = 'start';
   if (animationId) cancelAnimationFrame(animationId);
   document.getElementById('game-screen').classList.add('hidden');
-  document.getElementById('win-screen').style.display = 'none';
+  document.getElementById('win-screen').classList.add('hidden');
+  document.getElementById('about-screen').classList.add('hidden');
   document.getElementById('start-screen').classList.remove('hidden');
+}
+
+function showAbout() {
+  document.getElementById('start-screen').classList.add('hidden');
+  document.getElementById('win-screen').classList.add('hidden');
+  document.getElementById('game-screen').classList.add('hidden');
+  document.getElementById('about-screen').classList.remove('hidden');
+  setLang(currentLang); // refresh lang display
 }
 
 function showWin(winner) {
   gameState = 'win';
   cancelAnimationFrame(animationId);
   document.getElementById('game-screen').classList.add('hidden');
-  document.getElementById('win-screen').style.display = 'flex';
+  document.getElementById('win-screen').classList.remove('hidden');
 
-  const emoji = winner === 1 ? '🏆' : '🤖';
-  const title = winner === 1 ? '玩家獲勝！' : '電腦獲勝！';
-  const cls = winner === 1 ? 'p1-win' : 'p2-win';
-
-  document.getElementById('win-emoji').textContent = emoji;
+  const p1win = winner === 1;
+  document.getElementById('win-emoji').textContent = p1win ? '🏆' : '🤖';
   const t = document.getElementById('win-title');
-  t.textContent = title;
-  t.className = `win-title ${cls}`;
+  t.textContent = currentLang === 'zh'
+    ? (p1win ? '玩家獲勝！' : '電腦獲勝！')
+    : (p1win ? 'You Win!' : 'Computer Wins!');
+  t.className = 'win-title ' + (p1win ? 'p1-win' : 'p2-win');
   document.getElementById('win-score').textContent = `${p1Score} - ${p2Score}`;
 }
 
 function scorePoint(scorer) {
-  if (scorer === 1) p1Score++;
-  else p2Score++;
+  if (scorer === 1) p1Score++; else p2Score++;
   level++;
-  document.getElementById('hud-level').textContent = `球速: ${ballSpeed.toFixed(1)}`;
+  updateHUD();
   flashTimer = 20;
   if (p1Score >= WIN_SCORE || p2Score >= WIN_SCORE) {
     setTimeout(() => showWin(p1Score >= WIN_SCORE ? 1 : 2), 800);
@@ -365,196 +337,105 @@ function scorePoint(scorer) {
 }
 
 // AI
-let aiTargetY = null;
-let aiThinkTimer = 0;
+let aiTargetY = null, aiThinkTimer = 0;
 
 function updateAI() {
   aiThinkTimer--;
   if (aiThinkTimer <= 0) {
-    // Predict where ball will be
     if (bvx > 0) {
-      let predY = by;
-      let predX = canvas.width;
-      let simVx = bvx, simVy = bvy;
+      let predY = by, predX = canvas.width, simVx = bvx, simVy = bvy;
       while (predX < canvas.width - paddleW - 20) {
-        predX += simVx;
-        predY += simVy;
+        predX += simVx; predY += simVy;
         if (predY <= 0 || predY >= canvas.height) simVy *= -1;
       }
-      // Add some imperfection
       aiTargetY = predY + (Math.random() - 0.5) * paddleH * 0.8;
     } else {
       aiTargetY = canvas.height / 2 + (Math.random() - 0.5) * canvas.height * 0.3;
     }
     aiThinkTimer = 6 + Math.floor(Math.random() * 8);
   }
-
   if (aiTargetY !== null) {
     const diff = aiTargetY - p2y;
-    if (Math.abs(diff) > AI_SPEED) {
-      aiVY = diff > 0 ? AI_SPEED : -AI_SPEED;
-    } else {
-      aiVY = diff * 0.3;
-    }
+    aiVY = Math.abs(diff) > AI_SPEED ? (diff > 0 ? AI_SPEED : -AI_SPEED) : diff * 0.3;
   }
 }
 
-// Draw
 function draw() {
   const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#020c1a'; ctx.fillRect(0, 0, W, H);
+  ctx.setLineDash([8, 8]); ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.stroke(); ctx.setLineDash([]);
 
-  // BG
-  ctx.fillStyle = '#020c1a';
-  ctx.fillRect(0, 0, W, H);
-
-  // Center line
-  ctx.setLineDash([8, 8]);
-  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(W / 2, 0);
-  ctx.lineTo(W / 2, H);
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  // Trail
   trail.forEach((t, i) => {
-    const alpha = (i / trail.length) * 0.3;
-    const r = BALL_R * (i / trail.length) * 0.8;
-    ctx.beginPath();
-    ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-    ctx.fill();
+    const a = (i / trail.length) * 0.3, r = BALL_R * (i / trail.length) * 0.8;
+    ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${a})`; ctx.fill();
   });
 
-  // Ball
-  ctx.shadowColor = '#ffffff';
-  ctx.shadowBlur = 15;
-  ctx.beginPath();
-  ctx.arc(bx, by, BALL_R, 0, Math.PI * 2);
-  ctx.fillStyle = '#ffffff';
-  ctx.fill();
-  ctx.shadowBlur = 0;
+  ctx.shadowColor = '#ffffff'; ctx.shadowBlur = 15;
+  ctx.beginPath(); ctx.arc(bx, by, BALL_R, 0, Math.PI * 2);
+  ctx.fillStyle = '#ffffff'; ctx.fill(); ctx.shadowBlur = 0;
 
-  // Paddles
-  const p1x = 16;
-  const p2x = W - 16 - paddleW;
+  const p1x = 16, p2x = W - 16 - paddleW;
 
-  // P1 paddle (player - blue)
-  const grad1 = ctx.createLinearGradient(p1x, p1y - paddleH/2, p1x + paddleW, p1y + paddleH/2);
-  grad1.addColorStop(0, '#00d4ff');
-  grad1.addColorStop(1, '#005577');
-  ctx.shadowColor = '#00d4ff';
-  ctx.shadowBlur = 15;
-  ctx.fillStyle = grad1;
-  ctx.beginPath();
-  ctx.roundRect(p1x, p1y - paddleH/2, paddleW, paddleH, 4);
-  ctx.fill();
-  ctx.shadowBlur = 0;
+  const g1 = ctx.createLinearGradient(p1x, p1y - paddleH/2, p1x + paddleW, p1y + paddleH/2);
+  g1.addColorStop(0, '#00d4ff'); g1.addColorStop(1, '#005577');
+  ctx.shadowColor = '#00d4ff'; ctx.shadowBlur = 15;
+  ctx.fillStyle = g1;
+  ctx.beginPath(); ctx.roundRect(p1x, p1y - paddleH/2, paddleW, paddleH, 4); ctx.fill(); ctx.shadowBlur = 0;
 
-  // P2 paddle (AI - red)
-  const grad2 = ctx.createLinearGradient(p2x, p2y - paddleH/2, p2x + paddleW, p2y + paddleH/2);
-  grad2.addColorStop(0, '#ff4466');
-  grad2.addColorStop(1, '#880022');
-  ctx.shadowColor = '#ff4466';
-  ctx.shadowBlur = 15;
-  ctx.fillStyle = grad2;
-  ctx.beginPath();
-  ctx.roundRect(p2x, p2y - paddleH/2, paddleW, paddleH, 4);
-  ctx.fill();
-  ctx.shadowBlur = 0;
+  const g2 = ctx.createLinearGradient(p2x, p2y - paddleH/2, p2x + paddleW, p2y + paddleH/2);
+  g2.addColorStop(0, '#ff4466'); g2.addColorStop(1, '#880022');
+  ctx.shadowColor = '#ff4466'; ctx.shadowBlur = 15;
+  ctx.fillStyle = g2;
+  ctx.beginPath(); ctx.roundRect(p2x, p2y - paddleH/2, paddleW, paddleH, 4); ctx.fill(); ctx.shadowBlur = 0;
 
-  // Scores (real-time, drawn as large background text)
   ctx.font = `900 ${H * 0.28}px 'Orbitron', monospace`;
-  ctx.textBaseline = 'top';
-  ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(0,212,255,0.10)';
-  ctx.fillText(p1Score, W * 0.28, H * 0.08);
-  ctx.fillStyle = 'rgba(255,68,102,0.10)';
-  ctx.fillText(p2Score, W * 0.72, H * 0.08);
+  ctx.textBaseline = 'top'; ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(0,212,255,0.10)'; ctx.fillText(p1Score, W * 0.28, H * 0.08);
+  ctx.fillStyle = 'rgba(255,68,102,0.10)'; ctx.fillText(p2Score, W * 0.72, H * 0.08);
 }
 
 function update() {
   const W = canvas.width, H = canvas.height;
-
-  // Player control
-  const targetY = touchY !== null ? touchY : (mouseY !== null ? mouseY : p1y);
+  const targetY = (touchY !== null ? touchY : (mouseY !== null ? mouseY : p1y));
   const diff = targetY - p1y;
-  if (Math.abs(diff) > 2) {
-    p1vy = diff > 0 ? PADDLE_SPEED : -PADDLE_SPEED;
-    p1vy *= 0.85;
-  } else {
-    p1vy *= 0.6;
-  }
-  p1y += p1vy;
-  p1y = Math.max(paddleH / 2, Math.min(H - paddleH / 2, p1y));
+  p1vy = Math.abs(diff) > 2 ? (diff > 0 ? PADDLE_SPEED : -PADDLE_SPEED) * 0.85 : p1vy * 0.6;
+  p1y = Math.max(paddleH / 2, Math.min(H - paddleH / 2, p1y + p1vy));
 
-  // AI
   updateAI();
-  p2y += aiVY;
-  p2y = Math.max(paddleH / 2, Math.min(H - paddleH / 2, p2y));
+  p2y = Math.max(paddleH / 2, Math.min(H - paddleH / 2, p2y + aiVY));
 
-  // Ball trail
   trail.push({ x: bx, y: by });
   if (trail.length > TRAIL_LEN) trail.shift();
 
-  // Ball movement
-  bx += bvx;
-  by += bvy;
-
-  // Top/bottom bounce
+  bx += bvx; by += bvy;
   if (by - BALL_R <= 0) { by = BALL_R; bvy = Math.abs(bvy); }
   if (by + BALL_R >= H) { by = H - BALL_R; bvy = -Math.abs(bvy); }
 
-  const p1x = 16;
-  const p2x = W - 16 - paddleW;
+  const p1x = 16, p2x = W - 16 - paddleW;
 
-  // P1 collision
-  if (bx - BALL_R <= p1x + paddleW && bx >= p1x) {
-    if (by >= p1y - paddleH/2 - BALL_R && by <= p1y + paddleH/2 + BALL_R) {
-      bx = p1x + paddleW + BALL_R;
-      const hitRatio = (by - p1y) / (paddleH / 2);
-      const angle = hitRatio * (Math.PI / 3.5);
-      bvx = ballSpeed * Math.cos(angle);
-      bvy = ballSpeed * Math.sin(angle);
-      if (bvx < 2) bvx = 2;
-    }
+  if (bx - BALL_R <= p1x + paddleW && bx >= p1x && by >= p1y - paddleH/2 - BALL_R && by <= p1y + paddleH/2 + BALL_R) {
+    bx = p1x + paddleW + BALL_R;
+    const angle = ((by - p1y) / (paddleH / 2)) * (Math.PI / 3.5);
+    bvx = ballSpeed * Math.cos(angle); bvy = ballSpeed * Math.sin(angle);
+    if (bvx < 2) bvx = 2;
   }
 
-  // P2 collision
-  if (bx + BALL_R >= p2x && bx <= p2x + paddleW) {
-    if (by >= p2y - paddleH/2 - BALL_R && by <= p2y + paddleH/2 + BALL_R) {
-      bx = p2x - BALL_R;
-      const hitRatio = (by - p2y) / (paddleH / 2);
-      const angle = Math.PI - hitRatio * (Math.PI / 3.5);
-      bvx = ballSpeed * Math.cos(angle);
-      bvy = ballSpeed * Math.sin(angle);
-      if (bvx > -2) bvx = -2;
-    }
+  if (bx + BALL_R >= p2x && bx <= p2x + paddleW && by >= p2y - paddleH/2 - BALL_R && by <= p2y + paddleH/2 + BALL_R) {
+    bx = p2x - BALL_R;
+    const angle = Math.PI - ((by - p2y) / (paddleH / 2)) * (Math.PI / 3.5);
+    bvx = ballSpeed * Math.cos(angle); bvy = ballSpeed * Math.sin(angle);
+    if (bvx > -2) bvx = -2;
   }
 
-  // Scoring
-  if (bx + BALL_R < 0) {
-    // Reset ball position immediately to prevent double-scoring
-    bx = canvas.width / 2;
-    by = canvas.height / 2;
-    bvx = 0; bvy = 0;
-    scorePoint(2); // AI scores
-    return;
-  }
-  if (bx - BALL_R > canvas.width) {
-    bx = canvas.width / 2;
-    by = canvas.height / 2;
-    bvx = 0; bvy = 0;
-    scorePoint(1); // Player scores
-    return;
-  }
+  if (bx + BALL_R < 0) { bx = W / 2; by = H / 2; bvx = 0; bvy = 0; scorePoint(2); return; }
+  if (bx - BALL_R > W) { bx = W / 2; by = H / 2; bvx = 0; bvy = 0; scorePoint(1); return; }
 }
 
 function loop() {
   if (gameState !== 'playing') return;
-  update();
-  draw();
+  update(); draw();
   animationId = requestAnimationFrame(loop);
 }
 
@@ -563,12 +444,7 @@ window.startGame = startGame;
 window.pauseGame = pauseGame;
 window.showStart = showStart;
 window.showAbout = showAbout;
-
-function showAbout() {
-  document.getElementById('start-screen').classList.add('hidden');
-  document.getElementById('win-screen').style.display = 'none';
-  document.getElementById('about-screen').classList.remove('hidden');
-}
+window.setLang = setLang;
 </script>
 </body>
 </html>
