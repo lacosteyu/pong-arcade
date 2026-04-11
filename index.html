@@ -92,7 +92,12 @@
     #start-screen.hidden, #game-screen.hidden, #win-screen.hidden { display: none; }
 
     /* ── WIN SCREEN ── */
-    #win-screen { display: none; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+    #about-screen { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; width: 100%; }
+#about-screen::-webkit-scrollbar { width: 6px; }
+#about-screen::-webkit-scrollbar-track { background: transparent; }
+#about-screen::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+
+#win-screen { display: none; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
     .win-emoji { font-size: 72px; animation: float 3s ease-in-out infinite; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
     .win-title { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; }
@@ -128,6 +133,7 @@
       <span>📱 支援觸控</span>
     </div>
     <button class="btn btn-primary" onclick="startGame()">開始發球</button>
+    <button class="btn btn-secondary" onclick="showAbout()">關於</button>
   </div>
 
   <!-- GAME -->
@@ -138,6 +144,53 @@
     </div>
     <div class="canvas-wrap">
       <canvas id="pong"></canvas>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about-screen" class="hidden">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;max-width:700px;padding:8px;">
+      <div class="title-big" style="font-size:clamp(1.8rem,6vw,2.5rem);">
+        <span class="p1-text">PING</span> <span class="p2-text">PONG</span>
+      </div>
+      <p style="font-size:0.8rem;color:var(--text-dim);text-align:center;">🏓 The History of the World&#39;s First Commercial Video Game</p>
+      <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);border-radius:12px;padding:24px;max-height:65vh;overflow-y:auto;width:100%;">
+
+        <h2 style="color:var(--p1);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🎮 Early Origins | 早期起源</h2>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
+          <strong>1958</strong> — American physicist <strong>William Higinbotham</strong> created <em>Tennis for Two</em> at Brookhaven National Laboratory. Displayed on an oscilloscope, it is widely recognized as the world&#39;s first interactive electronic game.
+        </p>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:24px;
+">
+          <strong>1958</strong> — 美國物理學家 <strong>威廉·海吉諾比姆 (William Higinbotham)</strong> 在布魯克海文國家實驗室開發了《<strong>雙人網球 (Tennis for Two)</strong>》。使用示波器顯示畫面，被公認為史上第一個可互動的電子遊戲。
+        </p>
+
+        <h2 style="color:var(--p2);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🏆 Birth of Pong | Pong 的誕生</h2>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
+          <strong>1972</strong> — Engineer <strong>Al Alcorn</strong> at Atari, tasked by founder <strong>Nolan Bushnell</strong>, designed <em>Pong</em> — a pixel-style table tennis game with simple block graphics. It became an instant sensation.
+        </p>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:24px;">
+          <strong>1972</strong> — Atari 工程師 <strong>艾爾·艾爾科恩 (Al Alcorn)</strong>，接受創辦人 <strong>諾蘭·布什內爾 (Nolan Bushnell)</strong> 的任務，設計了《<strong>Pong</strong>》——一款以像素方塊與球組成的桌上型網球遊戲。一推出就造成轟動。
+        </p>
+
+        <h2 style="color:var(--p1);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🔊 Where the Name Came From | 名稱由來</h2>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
+          The name <em>Pong</em> mimics the sound of a ping-pong ball hitting a paddle. Some also trace it to the popular tabletop game <em>Ping-Pong</em> of the era. Atari was first to register it as a trademark.
+        </p>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);margin-bottom:24px;">
+          <strong>Pong</strong> 這個名字來自於乒乓球撞擊球拍的聲音。另一說是取自當時流行的桌遊「Ping-Pong」命名。Atari 率先搶先登記了版權。
+        </p>
+
+        <h2 style="color:var(--p2);font-family:'Orbitron',monospace;font-size:1rem;margin-bottom:16px;">🌍 Impact & Legacy | 影響與意義</h2>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text);margin-bottom:16px;">
+          Pong brought video games into <strong>public spaces</strong> — restaurants, bars, and arcades. In the early 1980s, LCD handheld Pong machines became a childhood classic across Asia. The game established the paradigm of <strong>2D graphics and paddle-style controls</strong> that shaped an entire generation of game design.
+        </p>
+        <p style="font-size:0.85rem;line-height:1.8;color:var(--text-dim);">
+          Pong 讓電子遊戲首次進入<strong>公共娛樂場所</strong>（餐廳、酒吧、遊樂場）。1980 年代初，LCD 掌上型 Pong 遊戲機風靡亞洲，成為許多人的童年回憶。這款遊戲奠定了<strong>2D 圖形、桿式控制器</strong>的遊戲典範，影響深遠。
+        </p>
+
+      </div>
+      <button class="btn btn-secondary" onclick="showStart()">← 返回</button>
     </div>
   </div>
 
@@ -509,6 +562,13 @@ function loop() {
 window.startGame = startGame;
 window.pauseGame = pauseGame;
 window.showStart = showStart;
+window.showAbout = showAbout;
+
+function showAbout() {
+  document.getElementById('start-screen').classList.add('hidden');
+  document.getElementById('win-screen').style.display = 'none';
+  document.getElementById('about-screen').classList.remove('hidden');
+}
 </script>
 </body>
 </html>
